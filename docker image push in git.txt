@@ -1,0 +1,25 @@
+Token generation :
+https://github.com/settings/tokens
+
+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
+
+create project repositry: 
+
+$git init
+$git add --a
+$git commit -m "initial commit"
+
+go to git hub create new repositry:
+
+$git remote add origin <link>
+$git push -u origin master
+
+create env for token and login:
+
+$export CRPAT= <TOKEN>
+$echo $CRPAT | docker login ghcr.io -u souvikpaul2000 --password-stdin
+
+tag image:
+
+$ docker tag <image id> ghcr.io/souvikpaul2000/<image name with tag>
+$ docker push ghcr.io/souvikpaul2000/<image name with tag>

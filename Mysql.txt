@@ -1,0 +1,25 @@
+select path <using cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+mysql -u root -p <enter>
+password Souvik
+
+
+show databases;
+create database Souvikdb;
+use Souvikdb;
+
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+INSERT INTO `members` (`full_names`,`gender`,`physical_address`,`contact_number`) VALUES ('Leonard Hofstadter','Male','Woodcrest',0845738767);
+
+
+
+USE mystudentdb;  
+mysql>SHOW TABLES
+
+

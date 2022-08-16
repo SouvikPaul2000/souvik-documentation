@@ -1,0 +1,77 @@
+TABLE CREATION:
+import MySQLdb
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app= Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI']="mysql://root:Souvik@localhost/database1"
+app.config['SQLALCHEMY_TRACK_MODIFICATION']= False
+
+
+db = SQLAlchemy(app)
+
+class Table1 (db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    Emp=db.Column(db.String(80),nullable=False)
+    email=db.Column(db.String(80),nullable=False)
+
+
+    def __init__(self,Emp,email):
+        self.Emp=Emp
+        self.email=email
+
+
+TERMINAL: 1. python
+          2.   >>>from main import db
+          3. >>> db.create_all()
+
+
+
+
+***********************************************************
+
+
+
+INSERT VALUES:
+
+
+
+>>> from main import Table1
+>>> from main import db
+>>> emp_data=Table1('Souvik paul','souvik@gmail.com')
+>>> db.session.add(emp_data)
+>>> db.session.commit()    
+
+***********************************************************
+
+DELETE VALUES:
+
+
+>>> db.session.delete(emp_data)
+>>> db.session.commit() 
+
+***********************************************************
+
+
+
+Retrieve a user by username:
+
+
+
+>>> emp_data  = Table1.query.filter_by(Emp='Souvik').first()
+>>> emp_data.id
+1
+>>> emp_data.email
+'souvik@gmail.com'  
+
+
+***********************************************************
+
+
+https://www.youtube.com/watch?v=y_Wc2qwVKbg
+
+
+
+
+
+        

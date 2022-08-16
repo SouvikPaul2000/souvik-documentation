@@ -1,0 +1,9 @@
+python -m venv C:\Users\cbnits\OneDrive\Desktop\Souvik Paul\Flask_Mysql\venv  
+
+
+activation: 1> ctrl+shift+p 
+            2>python select interpeter
+            3>enter path
+            4>C:\Users\cbnits\OneDrive\Desktop\Souvik Paul\Flask_Mysql\Paul\Flask_Mysql\venv\Scripts
+            5> select python.exe
+            6>open terminal

@@ -1,0 +1,182 @@
+ubuntu@ubuntu:~$ kubectl get pods
+NAME     READY   STATUS    RESTARTS   AGE
+1stpod   1/1     Running   0          18h
+ubuntu@ubuntu:~$ ls
+jagannath  snap
+ubuntu@ubuntu:~$ pwd
+/home/ubuntu
+ubuntu@ubuntu:~$ mkdir souvik
+ubuntu@ubuntu:~$ ls
+jagannath  snap  souvik
+ubuntu@ubuntu:~$ cd souvik
+ubuntu@ubuntu:~/souvik$ ls
+ubuntu@ubuntu:~/souvik$ cd..
+cd..: command not found
+ubuntu@ubuntu:~/souvik$ pwd
+/home/ubuntu/souvik
+ubuntu@ubuntu:~/souvik$ cd ~
+ubuntu@ubuntu:~$ pwd
+/home/ubuntu
+ubuntu@ubuntu:~$ kubectl get namespace
+NAME              STATUS   AGE
+kube-system       Active   20h
+kube-public       Active   20h
+kube-node-lease   Active   20h
+default           Active   20h
+ingress           Active   19h
+jagannath         Active   18h
+ubuntu@ubuntu:~$ vi souvikns.yml
+ubuntu@ubuntu:~$ kubectl apply -f souvikns.yml
+namespace/souvikns created
+ubuntu@ubuntu:~$ kubectl get ns
+NAME              STATUS   AGE
+kube-system       Active   20h
+kube-public       Active   20h
+kube-node-lease   Active   20h
+default           Active   20h
+ingress           Active   19h
+jagannath         Active   18h
+souvikns          Active   19s
+ubuntu@ubuntu:~$ ls
+jagannath  snap  souvik  souvikns.yml
+ubuntu@ubuntu:~$ kubectl delete namespace souvikns
+namespace "souvikns" deleted
+ubuntu@ubuntu:~$ kubectl get ns
+NAME              STATUS   AGE
+kube-system       Active   20h
+kube-public       Active   20h
+kube-node-lease   Active   20h
+default           Active   20h
+ingress           Active   19h
+jagannath         Active   18h
+ubuntu@ubuntu:~$ rm souvikns.yml
+ubuntu@ubuntu:~$ ls
+jagannath  snap  souvik
+ubuntu@ubuntu:~$ cd souvik
+ubuntu@ubuntu:~/souvik$ vi souvikns.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f souvikns.yml
+namespace/souvikns created
+ubuntu@ubuntu:~/souvik$ kubectl get ns
+NAME              STATUS   AGE
+kube-system       Active   20h
+kube-public       Active   20h
+kube-node-lease   Active   20h
+default           Active   20h
+ingress           Active   19h
+jagannath         Active   18h
+souvikns          Active   9s
+ubuntu@ubuntu:~/souvik$ ls
+souvikns.yml
+ubuntu@ubuntu:~/souvik$ vi mysqlconfig.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqlconfig.yml -n souvikns
+configmap/mysqlconfig created
+ubuntu@ubuntu:~/souvik$ kubectl get configmap
+NAME               DATA   AGE
+kube-root-ca.crt   1      21h
+ubuntu@ubuntu:~/souvik$ kubectl get configmap -n souvikns
+NAME               DATA   AGE
+kube-root-ca.crt   1      50m
+mysqlconfig        2      36s
+ubuntu@ubuntu:~/souvik$ vi mysqlsecrets.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqlsecrets.yml -n souvikns
+Error from server (BadRequest): error when creating "mysqlsecrets.yml": Secret in version "v1" cannot be handled as a Secret: illegal base64 data at input byte 4
+ubuntu@ubuntu:~/souvik$ vi mysqlsecrets.yml
+ubuntu@ubuntu:~/souvik$ echo "root" | base64
+cm9vdAo=
+ubuntu@ubuntu:~/souvik$ echo "Souvik" | base64
+U291dmlrCg==
+ubuntu@ubuntu:~/souvik$ vi mysqlsecrets.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqlsecrets.yml -n souvikns
+secret/mysqlsecrets created
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ ls
+mysqlconfig.yml  mysqldeploy.yml  mysqlsecrets.yml  souvikns.yml
+ubuntu@ubuntu:~/souvik$ rm mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ ls
+mysqlconfig.yml  mysqlsecrets.yml  souvikns.yml
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ ls
+mysqlconfig.yml  mysqldeploy.yml  mysqlsecrets.yml  souvikns.yml
+ubuntu@ubuntu:~/souvik$ rm mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ ls
+mysqlconfig.yml  mysqlsecrets.yml  souvikns.yml
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqldeploy.yml -n souvikns
+service/mysql created
+persistentvolumeclaim/mysql-pv-claim created
+error: error parsing mysqldeploy.yml: error converting YAML to JSON: yaml: line 43: did not find expected key
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqldeploy.yml -n souvikns
+service/mysql unchanged
+persistentvolumeclaim/mysql-pv-claim unchanged
+error: error parsing mysqldeploy.yml: error converting YAML to JSON: yaml: line 43: did not find expected key
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqldeploy.yml -n souvikns
+service/mysql unchanged
+persistentvolumeclaim/mysql-pv-claim unchanged
+error: error parsing mysqldeploy.yml: error converting YAML to JSON: yaml: line 43: did not find expected key
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqldeploy.yml -n souvikns
+service/mysql unchanged
+persistentvolumeclaim/mysql-pv-claim unchanged
+error: error parsing mysqldeploy.yml: error converting YAML to JSON: yaml: line 35: did not find expected '-' indicator
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqldeploy.yml -n souvikns
+service/mysql unchanged
+persistentvolumeclaim/mysql-pv-claim unchanged
+error: error parsing mysqldeploy.yml: error converting YAML to JSON: yaml: line 35: did not find expected '-' indicator
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqldeploy.yml -n souvikns
+service/mysql unchanged
+deployment.apps/mysql unchanged
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ vi pv-mysql.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f pv-mysql.yml -n souvikns
+persistentvolume/mysql-pv-volume created
+persistentvolumeclaim/mysql-pv-data created
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqldeploy.yml -n souvikns
+service/mysql unchanged
+error: error parsing mysqldeploy.yml: error converting YAML to JSON: yaml: line 38: did not find expected '-' indicator
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ kubectl apply -f mysqldeploy.yml -n souvikns
+service/mysql unchanged
+deployment.apps/mysql configured
+ubuntu@ubuntu:~/souvik$ kubectl get svc -n souvikns
+NAME    TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+mysql   NodePort   10.152.183.198   <none>        3306:32747/TCP   116m
+ubuntu@ubuntu:~/souvik$ kubectl pods svc -n souvikns
+error: unknown command "pods" for "kubectl"
+
+Did you mean this?
+        logs
+ubuntu@ubuntu:~/souvik$ kubectlget pods svc -n souvikns
+kubectlget: command not found
+ubuntu@ubuntu:~/souvik$ kubectl get pods svc -n souvikns
+Error from server (NotFound): pods "svc" not found
+ubuntu@ubuntu:~/souvik$ kubectl get pods  -n souvikns
+NAME                     READY   STATUS    RESTARTS   AGE
+mysql-85bd858bbd-wrbz6   0/1     Pending   0          2m28s
+ubuntu@ubuntu:~/souvik$ kubectl get pods  -n souvikns
+NAME                     READY   STATUS    RESTARTS   AGE
+mysql-85bd858bbd-wrbz6   0/1     Pending   0          2m43s
+ubuntu@ubuntu:~/souvik$ kubectl get nodes  -n souvikns
+NAME     STATUS   ROLES    AGE   VERSION
+ubuntu   Ready    <none>   25h   v1.24.0-2+59bbb3530b6769
+ubuntu@ubuntu:~/souvik$ kubectl get pods  -n souvikns
+NAME                     READY   STATUS    RESTARTS   AGE
+mysql-85bd858bbd-wrbz6   0/1     Pending   0          3m24s
+ubuntu@ubuntu:~/souvik$ kubectl get svc -n souvikns
+NAME    TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+mysql   NodePort   10.152.183.198   <none>        3306:32747/TCP   123m
+ubuntu@ubuntu:~/souvik$ ls
+mysqlconfig.yml  mysqldeploy.yml  mysqlsecrets.yml  pv-mysql.yml  souvikns.yml
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ vi mysqldeploy.yml
+ubuntu@ubuntu:~/souvik$ kubectl get pods  -n souvikns
+NAME                     READY   STATUS    RESTARTS   AGE
+mysql-85bd858bbd-wrbz6   0/1     Pending   0          12m
+ubuntu@ubuntu:~/souvik$
+
+

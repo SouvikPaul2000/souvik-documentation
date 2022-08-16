@@ -1,0 +1,99 @@
+$ git status
+fatal: not a git repository (or any of the parent directories): .git
+
+
+
+$ git init
+Initialized empty Git repository in C:/Users/cbnits/OneDrive/Desktop/Souvik paul 1/Api using sqlalchemy/Joins/.git/
+
+
+
+$ git add --a
+
+
+
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   .env
+        new file:   __init__.py
+        new file:   __pycache__/__init__.cpython-310.pyc
+        new file:   __pycache__/models.cpython-310.pyc
+        new file:   __pycache__/routes.cpython-310.pyc
+        new file:   main1.py
+        new file:   models.py
+        new file:   routes.py
+
+
+
+
+
+
+
+$ git commit -m "initial commit"
+[master (root-commit) 0573baf] initial commit
+ 8 files changed, 253 insertions(+)
+ create mode 100644 .env
+ create mode 100644 __init__.py
+ create mode 100644 __pycache__/__init__.cpython-310.pyc
+ create mode 100644 __pycache__/models.cpython-310.pyc
+ create mode 100644 __pycache__/routes.cpython-310.pyc
+ create mode 100644 main1.py
+ create mode 100644 models.py
+ create mode 100644 routes.py
+
+
+
+
+
+$ git config --global user.name
+Souvik
+
+
+
+
+
+
+
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+
+
+
+
+$ git remote add origin https://github.com/SouvikPaul2000/CBNITS-TASKS.git
+
+
+
+
+
+$ ssh-keygen -t ed25519 -C "souvik.paul@cbnits.com"
+
+
+
+
+
+
+$ eval "$(ssh-agent -s)"
+
+
+
+
+
+ ssh-add ~/.ssh/id_ed25519
+
+
+
+
+$ tail < ~/.ssh/id_ed25519.pub
+
+
+
+
+$ git push -u origin master
